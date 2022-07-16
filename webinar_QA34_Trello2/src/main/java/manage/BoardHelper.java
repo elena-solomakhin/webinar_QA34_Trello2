@@ -7,26 +7,36 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-public class BoardHelper extends HelperBase {
+
+public class BoardHelper extends HelperBase{
     public BoardHelper(WebDriver wd) {
         super(wd);
     }
 
-    public void initBoardCreationFormdHeader() {
-    click(By.cssSelector("[data-test-id='header-create-menu-button']"));
-    click(By.cssSelector("[aria-label='BoardIcon']"));// may be will not finf element
+    public void initBoardCreationFromHeader() {
+        click(By.cssSelector("[data-test-id='header-create-menu-button']"));
+        click(By.cssSelector("[aria-label='BoardIcon']"));
     }
 
-    public void fillBoardCreationForm(Board board) {
-   type(By.cssSelector("[data-test-id='create-board-title-input']"),board.getTitle());
+    public void fillboardCreationForm(Board board) {
+        type(By.cssSelector("[data-test-id='create-board-title-input']"),board.getTitle());
+    }
+
+    public void scrollDownTheForm() {
+        Actions action= new Actions(wd);
+        WebElement container = wd.findElement(By.cssSelector("[data-test-id='header-create-menu-popover']"));
+        Rectangle rect = container.getRect();
+        int x = rect.getX()+20;
+        int y = rect.getY()+rect.getHeight()/2;
+        action.moveByOffset(x,y).click().perform();
     }
 
     public void submitBoardCreation() {
         click(By.cssSelector("[data-test-id='create-board-submit-button']"));
     }
 
-    public void returnToHomePAge() {
-        click(By.cssSelector("//a[@aria-label='Back to home']"));
+    public void returnToHomePage() {
+        click(By.cssSelector(".m2N684FcksCyfT"));
     }
 
     public int getBoardCount() {
@@ -37,15 +47,28 @@ public class BoardHelper extends HelperBase {
 
     }
 
+    public boolean isCreated() {
+        return wd.findElements(By.cssSelector(".list-name-input")).size()>0;
 
-//    public void scrollDounTheForm() {
-//        Actions action= new Actions(wd);
-//        WebElement container = wd.findElement(By.cssSelector("[data-test-id='header-create-menu-popover']"));
-//        Rectangle rect= container.getRect();
-//        int x=rect.getX()+20;
-//        int y=rect.getY()+ rect.getHeight()/2;
-//        action.moveByOffset(x,y).click().perform();
-//    }
+    }
 
+    public void clickOnTheFirstBoard() {
+        click(By.cssSelector(".board-tile-details"));
+    }
+
+    public void openSideBoardMenu() {
+        click(By.cssSelector(".js-show-sidebar"));
+
+    }
+
+    public void openMore() {
+        click(By.cssSelector(".js-open-more"));
+    }
+
+    public void deleteBoard() {
+        click(By.cssSelector(".js-close-board"));
+        click(By.cssSelector(".js-confirm"));
+        click(By.cssSelector("[data-test-id= 'close-board-delete-board-button']"));
+        click(By.cssSelector("[data-test-id= 'close-board-delete-board-confirm-button']"));
+    }
 }
-

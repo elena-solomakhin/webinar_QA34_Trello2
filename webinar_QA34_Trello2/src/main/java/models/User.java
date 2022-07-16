@@ -9,9 +9,9 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class Board {
-    String title;
+public class User {
+    String email;
+    String password;
 
 
 }
-

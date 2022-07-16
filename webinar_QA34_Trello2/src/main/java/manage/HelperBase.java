@@ -3,14 +3,13 @@ package manage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+
 public class HelperBase {
     WebDriver wd;
 
-    // generate constructor
     public HelperBase(WebDriver wd) {
         this.wd = wd;
     }
-
     public void click(By locator) {
         wd.findElement(locator).click();
     }
@@ -21,13 +20,12 @@ public class HelperBase {
         wd.findElement(locator).sendKeys(text);
     }
 
-
-
-    public void pausa(int millis) {
+    public void pause(int millis ) {
         try {
-            Thread.sleep ( millis);
-        } catch (InterruptedException e) {
+            Thread.sleep(millis);
+        } catch (InterruptedException e){
             e.printStackTrace();
         }
+
     }
 }
